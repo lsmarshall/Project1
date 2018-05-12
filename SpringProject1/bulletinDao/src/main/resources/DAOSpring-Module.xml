@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd            
+            http://www.springframework.org/schema/jee 
+            http://www.springframework.org/schema/jee/spring-jee.xsd">
+    
+    <!-- 
+    <context:annotation-config/>
+    <context:component-scan base-package="com.bulletinspace.bulletindao" /> -->
+    
+
+    <!--<bean id="helloWorld" class="com.test.HelloWorld" ></bean>-->
+    
+    <!--<bean id="userServiceImp" class="org.mdacc.ris.ddp.service.UserServiceImp" />-->
+    
+    <!-- 
+    <bean id="student" class="com.bulletinspace.bulletindao.Student">
+        <property name="last_name" value="Smith"/>
+        <property name="courses" ref="coursesclass"/>
+        <property name="address" ref="addressclass"/>
+    </bean>
+    <bean id="coursesclass" class="com.bulletinspace.bulletindao.Courses"/>     
+    <bean id="addressclass" class="com.bulletinspace.bulletindao.Address"/>    -->
+
+    
+    <context:annotation-config/>
+    <context:component-scan base-package="com.bulletinspace.bulletindao" />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--<bean id="helloWorld" class="com.test.HelloWorld" ></bean>-->
+    
+    <!--<bean id="userServiceImp" class="org.mdacc.ris.ddp.service.UserServiceImp" />-->
+
+    <bean id="personDao" class="om.bulletinspace.bulletindao.domains.PersonDAO">
+    </bean>
+    
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="person-unit" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    
+</beans>
